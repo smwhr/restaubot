@@ -1,9 +1,8 @@
 <?php
-
-define('BOT_TOKEN', getenv('BOT_TOKEN'));
 define('WEBHOOK_URL', 'https://restau.troisyaourts.com/webhook-malin/');
 
 require_once(__DIR__."/../vendor/autoload.php");
+require_once(__DIR__."/../app/config.php");
 
 $app = new Silex\Application();
 $app["debug"] = true;
