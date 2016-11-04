@@ -22,7 +22,7 @@ $app['messager'] = $app->protect(
   curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
   
-  curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($container));
+  curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($message));
   $result = curl_exec($ch);
   curl_close($ch);
   return $result;
