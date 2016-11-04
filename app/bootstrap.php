@@ -38,7 +38,7 @@ $app['messager'] = $app->protect(
 
   curl_setopt($ch, CURLOPT_URL, $url);
   
-  $result = curl_exec($ch);
+  $result = exec_curl_request($ch);
   curl_close($ch);
   return $result;
 });
