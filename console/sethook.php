@@ -1,6 +1,10 @@
 <?php
 
 require_once(__DIR__."/../app/bootstrap.php");
+if($argv[1] == "delete"){
+  $ok = $app["messager"]('setWebhook', ['url' => ''], true);
+}else{
+  $ok = $app["messager"]('setWebhook', ['url' => WEBHOOK_URL], true);
+}
 
-$ok = $app["messager"]('setWebhook', array('url' => isset($argv[1]) && $argv[1] == 'delete' ? '' : WEBHOOK_URL));
 var_dump($ok);

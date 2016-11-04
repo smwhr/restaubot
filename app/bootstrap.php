@@ -15,14 +15,29 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 
 
 $app['messager'] = $app->protect(
-  function($method, $message) use ($app){
-  $url = 'https://api.telegram.org/bot'.BOT_TOKEN.'/';
-  $ch = curl_init($url);
-  curl_setopt($ch, CURLOPT_POST, 1);
-  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+  function($method, $parameters, $plain = false) use ($app){
+  $api_url = 'https://api.telegram.org/bot'.BOT_TOKEN.'/';
+  $ch = curl_init();
+
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+  if($plain){
+      foreach ($parameters as $key => &$val) {
+        // encoding to JSON array parameters, for example reply_markup
+        if (!is_numeric($val) && !is_string($val)) {
+          $val = json_encode($val);
+        }
+      }
+      $url = $api_url.$method.'?'.http_build_query($parameters);
+  }else{
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+      curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($message));
+      $url = $api_url;
+  }
+
+  curl_setopt($ch, CURLOPT_URL, $url);
   
-  curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($message));
   $result = curl_exec($ch);
   curl_close($ch);
   return $result;
