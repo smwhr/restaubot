@@ -35,13 +35,13 @@ $app->match('/webhook-malin', function(Request $request) use ($app){
         'resize_keyboard' => true)));
     } else if ($text === "Hello" || $text === "Hi") {
       $app["messager"]("sendMessage", array('chat_id' => $chat_id, "text" => 'Nice to meet you'), true);
-    } else if (strpos($text, "/stop") === 0) {
+    } else if (strpos($text, "/stop") === 0){
       // stop now
     } else {
       return new JsonResponse(["method" => "sendMessage",
                                "chat_id" => $chat_id, 
                                "reply_to_message_id" => $message_id, 
-                               "text" => "Cool")
+                               "text" => "Cool"]);
     }
   } else {
     $app["messager"]("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'), true);
