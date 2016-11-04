@@ -1,5 +1,5 @@
 <?php
-define('WEBHOOK_URL', 'https://restau.troisyaourts.com/webhook-malin/');
+define('WEBHOOK_URL', 'https://restaubot.troisyaourts.com/webhook-malin/');
 
 require_once(__DIR__."/../vendor/autoload.php");
 require_once(__DIR__."/../app/config.php");
